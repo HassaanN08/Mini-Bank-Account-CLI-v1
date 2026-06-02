@@ -1,12 +1,12 @@
 #include <iostream>
 using namespace std;
 
-void depositMoney(int* balance) {
-    int deposit;
+void depositMoney(double* balance) {
+    double deposit;
     cout << "Enter Deposit Amount: $";
     cin >> deposit;
 
-    while(deposit < 0) {
+    while(deposit <= 0) {
         cout << "Invalid amount. Try again: $";
         cin >> deposit;
     }
@@ -14,13 +14,13 @@ void depositMoney(int* balance) {
     *balance += deposit;
 }
 
-void withDrawMoney(int* balance) {
-    int withdraw;
+void withDrawMoney(double* balance) {
+    double withdraw;
     cout << "Enter Amount To Withdraw: $";
     cin >> withdraw;
 
-    while(withdraw < 0 || withdraw > *balance) {
-        cout << (withdraw < 0 ? "Invalid amount. Try again: $" : "Entered amount greater than your current balance. Try again: $");
+    while(withdraw <= 0 || withdraw > *balance) {
+        cout << (withdraw <= 0 ? "Invalid amount. Try again: $" : "Entered amount greater than your current balance. Try again: $");
         cin >> withdraw;
     }
 
@@ -36,8 +36,8 @@ void getChoice(int* choice) {
     }
 }
 
-void showMenu(int* balance) {
-    cout << "Balance: $" << *balance << '\n' << '\n';
+void showMenu(double balance) {
+    cout << "Balance: $" << balance << '\n' << '\n';
     cout << "1. Deposit Money" << '\n' << "2. Withdraw Money" << '\n' << "3. Show Balance" << '\n' << "4. Show Transaction Count" << '\n' << "5. Exit" << '\n' << '\n';
 }
 
@@ -45,11 +45,11 @@ int main() {
 
     cout << "=======================" << '\n' << "   Mini Bank Account   " << '\n' << "=======================" << '\n' << '\n';
 
-    int balance = 0;
+    double balance = 0;
     int choice;
     int transactions = 0;
 
-    showMenu(&balance);
+    showMenu(balance);
     getChoice(&choice);
 
     while(choice != 5) {
@@ -58,28 +58,28 @@ int main() {
                 depositMoney(&balance);
                 transactions++;
                 cout << '\n';
-                showMenu(&balance);
+                showMenu(balance);
                 getChoice(&choice);
                 break;
             case 2:
                 withDrawMoney(&balance);
                 transactions++;
                 cout << '\n';
-                showMenu(&balance);
+                showMenu(balance);
                 getChoice(&choice);
                 break;
             case 3:
-                showMenu(&balance);
+                showMenu(balance);
                 getChoice(&choice);
                 break;
             case 4:
                 cout << "Total Transactions: " << transactions;
                 cout << '\n';
-                showMenu(&balance);
+                showMenu(balance);
                 getChoice(&choice);
                 break;
             default:
-                showMenu(&balance);
+                showMenu(balance);
                 getChoice(&choice);
                 break;
         }
